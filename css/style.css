@@ -1,0 +1,41 @@
+body {
+    color: white;
+    background-color: gray;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+
+    min-height: 100vh;
+}
+
+.banner {
+    background-color: gray;
+    border-bottom: 1px solid white;
+    padding: 1em;
+}
+
+#options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option-box {
+    width: 70%;
+
+    margin: 1em;
+    padding: 2em;
+    border: 1px solid white;
+    border-radius: 1em;
+}
+
+canvas {
+    border: 1px solid red;
+    background-color: white;
+}
+
+button {
+    padding: 0.5em;
+}
