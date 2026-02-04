@@ -23,6 +23,10 @@ main {
 }
 
 .option-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
     width: 70%;
 
     margin: 1em;
@@ -32,10 +36,11 @@ main {
 }
 
 canvas {
-    border: 1px solid red;
+    margin: 1em;
+
     background-color: white;
 }
 
-button {
+button, select {
     padding: 0.5em;
 }

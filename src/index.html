@@ -13,12 +13,19 @@
         <main>
             <aside id="options">
                 <div class="option-box">
-                    <label>Number of points: <span id="number-of-points-label">50</span> </label>
-                    <input type="range" min="1" max="100" value="50" class="slider" id="number-of-points">
+                    <label>Number of points: <span id="number-of-points-label"></span> </label>
+                    <input type="range" min="1" max="100" value="20" class="slider" id="number-of-points">
                     <button id="generate-points">Generate</button>
                 </div>
+                <div class="option-box">
+                    <label> Algorithm: </label>
+                    <select id="chosen-algorithm">
+                        <option value="nearest_neighbor">Nearest Neighbor</option>
+                    </select>
+                    <button id="run-algorithm">Run</button>
+                </div>
             </aside>
-            <canvas id="canvas" height="1000" width="1000"></canvas>
+            <canvas id="canvas" height="800" width="1600"></canvas>
         </main>
     </body>
 

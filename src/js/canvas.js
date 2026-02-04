@@ -1,10 +1,3 @@
-export class Point {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 function draw_point(pt, ctx) {
     ctx.beginPath();
     ctx.arc(pt.x, pt.y, 5, 0, Math.PI * 2, true);
@@ -20,13 +13,24 @@ function draw_line(pt1, pt2, ctx) {
     ctx.stroke();
 }
 
-export function draw_path_from_array(pts, ctx) {
-    pts.forEach(pt => {
-        draw_point(pt, ctx);
-    })
+export function clear_canvas(canvas) {
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+export function draw_path_from_array(pts, canvas) {
+    const ctx = canvas.getContext("2d");
 
     for(let i=1; i<pts.length; i++) {
         draw_line(pts[i-1], pts[i], ctx);
     }
+}
+
+export function draw_points_from_array(pts, canvas) {
+    const ctx = canvas.getContext("2d");
+
+    pts.forEach(pt => {
+        draw_point(pt, ctx);
+    })
 }
 
