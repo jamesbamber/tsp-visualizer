@@ -5,7 +5,7 @@ export default class Point {
     }
 
     static dist(pt1, pt2) {
-        return (pt1.x - pt2.x) ** 2 + (pt1.y - pt2.y) ** 2;
+        return ((pt1.x - pt2.x) ** 2 + (pt1.y - pt2.y) ** 2) ** 0.5;
     }
 
     static path_length(pts) {

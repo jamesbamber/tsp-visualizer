@@ -2,8 +2,9 @@ import { clear_canvas, draw_points_from_array, draw_path_from_array } from "./ca
 import Point from "./point.js"
 
 export default class TSP {
-    constructor(canvas) {
+    constructor(canvas, update_ui) {
         this.canvas = canvas;
+        this.update_ui = update_ui;
 
         this.paused = false;
         this.cancelled = false;
@@ -21,6 +22,10 @@ export default class TSP {
     new_problem(number_of_points) {
         this.paused = false;
         this.cancelled = false;
+
+        this.current_path = undefined;
+        this.best_path = undefined;
+        this.update_ui();
 
         this.pts = Array.from({ length: number_of_points}, () => {
             const x = Math.floor(Math.random() * canvas.width);
@@ -41,8 +46,10 @@ export default class TSP {
         for await (const step of algorithm(this.pts)) {
             if(this.cancelled) break;
 
+            this.current_path = Point.path_length(step.current_solution);
             final_state = step;
-            this.render_step(step);
+
+            await this.render_step(step);
             await this.sleep(this.delay);
         }
 
@@ -50,7 +57,9 @@ export default class TSP {
     }
 
     end_of_run(final_state) {
-        alert("distance = " + Point.path_length(final_state.current_solution)/1000 + "km");
+        if(this.best_path == undefined || this.current_path < this.best_path) this.best_path = this.current_path;
+
+        this.render_step(final_state);
 
         this.paused = false;
         this.cancelled = false;
@@ -60,6 +69,8 @@ export default class TSP {
         clear_canvas(this.canvas);
         draw_points_from_array(step.points, this.canvas);
         draw_path_from_array(step.current_solution, this.canvas);
+
+        this.update_ui(this.current_path, this.best_path);
     }
 
     display_points(pts) {

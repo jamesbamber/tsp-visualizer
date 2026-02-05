@@ -8,7 +8,7 @@ let problem;
 
 function init() {
     const canvas = document.getElementById("canvas");
-    problem = new TSP(canvas);
+    problem = new TSP(canvas, update_path_length);
 
     add_algorithm_to_select();
 
@@ -75,6 +75,14 @@ function stop_execution() {
     problem.stop();
 }
 
+function update_path_length(current_path_length, best_path_length) {
+    const current_path = document.getElementById("current-path");
+    const best_path = document.getElementById("best-path");
+
+    current_path.textContent = current_path_length?.toFixed(3);
+    best_path.textContent = best_path_length?.toFixed(3);
+}
+
 async function run_selected_algorithm() {
     if(!problem.pts) {
         alert("Ran empty problem");
@@ -90,6 +98,7 @@ async function run_selected_algorithm() {
         enable_buttons();
     }
 }
+
 
 function update_number_of_points() {
     const points_slider = document.getElementById("number-of-points");
