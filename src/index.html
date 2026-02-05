@@ -19,11 +19,17 @@
                 </div>
                 <div class="option-box">
                     <label> Algorithm: </label>
-                    <select id="chosen-algorithm">
-                        <option value="nearest_neighbor">Nearest Neighbor</option>
-                    </select>
+                    <select id="chosen-algorithm"> </select>
                     <button id="run-algorithm">Run</button>
+                    <button id="stop-algorithm">Stop</button>
+                    <label>Delay (ms): <span id="delay-time-label"></span> </label>
+                    <input type="range" min="10" max="200" value="100" class="slider" id="delay-time">
                 </div>
+                <div class="option-box">
+                    <label> Current Path: <span id="current-path"></span></label>
+                    <label> Best Path: <span id="best-path"></span></label>
+                </div>
+
             </aside>
             <canvas id="canvas" height="800" width="1600"></canvas>
         </main>

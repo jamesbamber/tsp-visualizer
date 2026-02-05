@@ -17,7 +17,7 @@ export default function* run(pts) {
         let next_node = null;
         for(let i=0; i<N; i++) {
             if(visited[i] === 1) continue;
-            if(next_node === null || Point.dist(current_node, pts[i]) < Point.dist(current_node, pts[next_node]))
+            if(next_node === null || Point.dist(current_node, pts[i]) > Point.dist(current_node, pts[next_node]))
                 next_node = i;
         }
 

@@ -1,10 +1,17 @@
 import TSP from "./tsp.js";
 import Point from "./point.js"
 
+import Algorithms from "./algorithms/util.js"
+
 document.addEventListener("DOMContentLoaded", init);
 let problem;
 
 function init() {
+    const canvas = document.getElementById("canvas");
+    problem = new TSP(canvas);
+
+    add_algorithm_to_select();
+
     const generate_points = document.getElementById("generate-points");
     generate_points.addEventListener("click", generate_random_points);
 
@@ -12,23 +19,75 @@ function init() {
     points_slider.addEventListener("input", update_number_of_points);
     update_number_of_points();
 
+    const delay_slider = document.getElementById("delay-time");
+    delay_slider.addEventListener("input", update_delay_time);
+    update_delay_time();
+
     const run_algorithm = document.getElementById("run-algorithm");
     run_algorithm.addEventListener("click", run_selected_algorithm);
+
+    const stop_algorithm = document.getElementById("stop-algorithm");
+    stop_algorithm.style.display = "none";
+    stop_algorithm.addEventListener("click", stop_execution);
 }
 
-function run_selected_algorithm() {
-    if(!problem) {
+function add_algorithm_to_select() {
+    const algo_select = document.getElementById("chosen-algorithm");
+
+    for(const [algorithm, label] of Object.entries(Algorithms.labels)) {
+        const option = document.createElement("option");
+        option.value = algorithm;
+        option.textContent = label;
+
+        algo_select.appendChild(option);
+    }
+}
+
+function disable_buttons() {
+    const run_button = document.getElementById("run-algorithm");
+    const stop_button = document.getElementById("stop-algorithm");
+    
+    run_button.style.display = "none";
+    stop_button.style.display = "block";
+
+    const generate_button = document.getElementById("generate-points");
+    const algo_select = document.getElementById("chosen-algorithm");
+
+    generate_button.disabled = true;
+    algo_select.disabled = true;
+}
+
+function enable_buttons() {
+    const run_button = document.getElementById("run-algorithm");
+    const stop_button = document.getElementById("stop-algorithm");
+
+    run_button.style.display = "block";
+    stop_button.style.display = "none";
+
+    const generate_button = document.getElementById("generate-points");
+    const algo_select = document.getElementById("chosen-algorithm");
+
+    generate_button.disabled = false;
+    algo_select.disabled = false;
+}
+
+function stop_execution() {
+    problem.stop();
+}
+
+async function run_selected_algorithm() {
+    if(!problem.pts) {
         alert("Ran empty problem");
         return;
     }
 
-    const chosen_algorithm = document.getElementById("chosen-algorithm");
-    switch (chosen_algorithm.value) {
-        case "nearest_neighbor" :
-            problem.run_nearest_neighbor();
-            break;
-        default :
-            throw new Error("Selected algorithm not implemented");
+    disable_buttons();
+
+    try {
+        const chosen_algorithm = Algorithms.functions[document.getElementById("chosen-algorithm").value];
+        await problem.run_algorithm(chosen_algorithm);
+    } finally {
+        enable_buttons();
     }
 }
 
@@ -39,17 +98,15 @@ function update_number_of_points() {
     points_label.textContent = points_slider.value;
 }
 
+function update_delay_time() {
+    const delay_slider = document.getElementById("delay-time");
+    const delay_label = document.getElementById("delay-time-label");
+
+    problem.set_delay(delay_slider.value);
+    delay_label.textContent = delay_slider.value;
+}
+
 function generate_random_points() {
     const points_slider = document.getElementById("number-of-points");
-    const POINTS = points_slider.value;
-    const canvas = document.getElementById("canvas");
-
-    // TODO: this logic should probably be in the TSP class
-    const pts = Array.from({ length: POINTS}, () => {
-        const x = Math.floor(Math.random() * canvas.width);
-        const y = Math.floor(Math.random() * canvas.height);
-        return new Point(x, y);
-    });
-
-    problem = new TSP(pts, canvas);
+    problem.new_problem(points_slider.value);
 }

@@ -4,7 +4,17 @@ export default class Point {
         this.y = y;
     }
 
-    dist(pt) {
-        return (this.x - pt.x) ** 2 + (this.y - pt.y) ** 2;
+    static dist(pt1, pt2) {
+        return (pt1.x - pt2.x) ** 2 + (pt1.y - pt2.y) ** 2;
+    }
+
+    static path_length(pts) {
+        let length = 0;
+
+        for(let i = 0; i < pts.length - 1; i++) {
+            length += Point.dist(pts[i], pts[i+1]);
+        }
+
+        return length;
     }
 }
