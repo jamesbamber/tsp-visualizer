@@ -11,7 +11,7 @@
     <body>
         <header class="banner"> 
             <h3>TSP visualizer</h3>
-            <div id="login-container">
+            <div class="two-button-container">
                 <button id="login">Login</button>
                 <button id="register">Register</button>
             </div>
@@ -22,6 +22,12 @@
                     <label>Number of points: <span id="number-of-points-label"></span> </label>
                     <input type="range" min="1" max="100" value="20" class="slider" id="number-of-points">
                     <button id="generate-points">Generate</button>
+                    <label>List of Points:</label>
+                    <textarea id="points-list"></textarea>
+                    <div class="two-button-container">
+                        <button id="load-points">Load</button>
+                        <button id="save-points">Save</button>
+                    </div>
                 </div>
                 <div class="option-box">
                     <label> Algorithm: </label>

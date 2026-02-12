@@ -20,7 +20,15 @@ export default class TSP {
         this.delay = delay;
     }
 
-    new_problem(number_of_points) {
+    generate_random_points(number_of_points) {
+        return Array.from({ length: number_of_points}, () => {
+            const x = Math.floor(Math.random() * LOGICAL_SPACE.width);
+            const y = Math.floor(Math.random() * LOGICAL_SPACE.height);
+            return new Point(x, y);
+        });
+    }
+
+    new_problem(pts) {
         this.paused = false;
         this.cancelled = false;
 
@@ -28,11 +36,7 @@ export default class TSP {
         this.best_path = undefined;
         this.update_ui();
 
-        this.pts = Array.from({ length: number_of_points}, () => {
-            const x = Math.floor(Math.random() * LOGICAL_SPACE.width);
-            const y = Math.floor(Math.random() * LOGICAL_SPACE.height);
-            return new Point(x, y);
-        });
+        this.pts = pts
 
         this.display_points(this.pts);
     }
