@@ -9,7 +9,13 @@
     </head>
     
     <body>
-        <header class="banner"> TSP visualizer </header>
+        <header class="banner"> 
+            <h3>TSP visualizer</h3>
+            <div id="login-container">
+                <button id="login">Login</button>
+                <button id="register">Register</button>
+            </div>
+        </header>
         <main>
             <aside id="options">
                 <div class="option-box">
@@ -27,11 +33,13 @@
                 </div>
                 <div class="option-box" id="path-length-box">
                     <label> Current Path: </label><span id="current-path"></span>
-                    <label> Best Path: </label><span id="best-path"></span>
+                    <label> Current Best: </label><span id="best-path"></span>
                 </div>
 
             </aside>
-            <canvas id="canvas" height="800" width="1600"></canvas>
+            <div id="canvas-container">
+                <canvas id="canvas"></canvas>
+            </div>
         </main>
     </body>
 

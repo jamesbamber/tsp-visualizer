@@ -8,6 +8,10 @@ let problem;
 
 function init() {
     const canvas = document.getElementById("canvas");
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
     problem = new TSP(canvas, update_path_length);
 
     add_algorithm_to_select();
@@ -29,6 +33,15 @@ function init() {
     const stop_algorithm = document.getElementById("stop-algorithm");
     stop_algorithm.style.display = "none";
     stop_algorithm.addEventListener("click", stop_execution);
+}
+
+function resizeCanvas() {
+    const canvas = document.getElementById("canvas");
+    const container = document.getElementById("canvas-container");
+    const padding = parseFloat(window.getComputedStyle(container).padding);
+
+    canvas.width = container.clientWidth - 2*padding;
+    canvas.height = container.clientHeight - 2*padding;
 }
 
 function add_algorithm_to_select() {

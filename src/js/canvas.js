@@ -22,7 +22,7 @@ export function draw_path_from_array(pts, canvas) {
     const ctx = canvas.getContext("2d");
 
     for(let i=1; i<pts.length; i++) {
-        draw_line(pts[i-1], pts[i], ctx);
+        draw_line(pts[i-1].toCanvasCoords(canvas), pts[i].toCanvasCoords(canvas), ctx);
     }
 }
 
@@ -30,7 +30,7 @@ export function draw_points_from_array(pts, canvas) {
     const ctx = canvas.getContext("2d");
 
     pts.forEach(pt => {
-        draw_point(pt, ctx);
+        draw_point(pt.toCanvasCoords(canvas), ctx);
     })
 }
 

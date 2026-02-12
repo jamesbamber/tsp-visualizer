@@ -1,7 +1,16 @@
+import { LOGICAL_SPACE } from "./config.js";
+
 export default class Point {
     constructor(x, y) {
         this.x = x;
         this.y = y;
+    }
+
+    toCanvasCoords(canvas) {
+        return new Point(
+            this.x * canvas.width / LOGICAL_SPACE.width,
+            this.y * canvas.height / LOGICAL_SPACE.height
+        )
     }
 
     static dist(pt1, pt2) {

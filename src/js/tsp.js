@@ -1,5 +1,6 @@
 import { clear_canvas, draw_points_from_array, draw_path_from_array } from "./canvas.js"
 import Point from "./point.js"
+import { LOGICAL_SPACE } from "./config.js";
 
 export default class TSP {
     constructor(canvas, update_ui) {
@@ -28,8 +29,8 @@ export default class TSP {
         this.update_ui();
 
         this.pts = Array.from({ length: number_of_points}, () => {
-            const x = Math.floor(Math.random() * canvas.width);
-            const y = Math.floor(Math.random() * canvas.height);
+            const x = Math.floor(Math.random() * LOGICAL_SPACE.width);
+            const y = Math.floor(Math.random() * LOGICAL_SPACE.height);
             return new Point(x, y);
         });
 
