@@ -2,13 +2,17 @@
     --color-background: rgb(29, 29, 29);
 
     --color-primary: rgb(63, 63, 63);
+    --color-secondary: rgb(100, 100, 100);
+    --color-hover: rgb(197, 197, 197);
 
-    --color-text: white;
+    --color-text: rgb(217, 217, 217);
 }
 
 body {
     color: var(--color-text);
     background-color: var(--color-background);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 
     display: grid;
     grid-template-rows: auto 1fr;
@@ -30,12 +34,11 @@ main {
     align-items: center;
     justify-content: space-between;
 
-    /* background-color: gray; */
     border-bottom: 1px solid var(--color-primary);
     padding: 1em;
 }
 
-h3 {
+h1 {
     margin: 0;
 }
 
@@ -51,11 +54,11 @@ h3 {
 .option-box {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 1em;
 
-    width: 70%;
+    width: 80%;
 
-    padding: 2em;
+    padding: 1em;
     background-color: var(--color-primary);
     border-radius: 1em;
 }
@@ -70,7 +73,15 @@ h3 {
 }
 
 button, select {
-    padding: 0.5em;
+    padding: 1em;
+    background-color: var(--color-secondary);
+    border: 0px solid cornflowerblue;
+    border-radius: 1em;
+    color: inherit;
+}
+
+button:hover, select:hover {
+    background-color: var(--color-hover);
 }
 
 #path-length-box {
