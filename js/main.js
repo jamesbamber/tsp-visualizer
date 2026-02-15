@@ -1,5 +1,6 @@
 import TSP from "./tsp.js";
 import Point from "./point.js"
+import UserDashboard from "./context/userDashboard.js"
 
 import Algorithms from "./algorithms/util.js"
 
@@ -8,37 +9,39 @@ let problem;
 
 function init() {
     const canvas = document.getElementById("canvas");
-
+    
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-
+    
     problem = new TSP(canvas, update_path_length);
-
+    const userDashboard = new UserDashboard();
+    
     add_algorithm_to_select();
-
+    
     const points_slider = document.getElementById("number-of-points");
     points_slider.addEventListener("input", update_number_of_points);
     update_number_of_points();
-
+    
     const generate_points = document.getElementById("generate-points");
     generate_points.addEventListener("click", generate_random_points);
-
+    
     const load_points = document.getElementById('load-points');
     load_points.addEventListener('click', load_points_from_list);
-
+    
     const save_points = document.getElementById('save-points');
     save_points.addEventListener('click', save_points_from_list);
-
+    
     const delay_slider = document.getElementById("delay-time");
     delay_slider.addEventListener("input", update_delay_time);
     update_delay_time();
-
+    
     const run_algorithm = document.getElementById("run-algorithm");
     run_algorithm.addEventListener("click", run_selected_algorithm);
-
+    
     const stop_algorithm = document.getElementById("stop-algorithm");
     stop_algorithm.style.display = "none";
     stop_algorithm.addEventListener("click", stop_execution);
+    
 }
 
 function resizeCanvas() {

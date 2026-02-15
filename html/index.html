@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TSP visualizer</title>
+        <meta charset="UTF-8">
+    
+        <script type="module" src="../js/main.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/form.css">
+        <link rel="stylesheet" href="../css/point_sets.css">
+
+    </head>
+    
+    <body>
+        <header class="banner"> 
+            <h1>TSP visualizer</h1>
+            <div id="path-length-box">
+                    <label> Current Path: </label><span id="current-path"></span>
+                    <label> Current Best: </label><span id="best-path"></span>
+            </div>
+            <div class="two-button-container">
+                <button id="login">Login</button>
+                <button id="signup">Sign up</button>
+            </div>
+        </header>
+        <main>
+            <aside id="options">
+                <div class="option-box">
+                    <label> Algorithm: </label>
+                    <select id="chosen-algorithm"> </select>
+                    <button id="run-algorithm">Run</button>
+                    <button id="stop-algorithm">Stop</button>
+                    <label>Delay (ms): <span id="delay-time-label"></span> </label>
+                    <input type="range" min="10" max="200" value="100" class="slider" id="delay-time">
+                </div>
+                <div class="option-box" id="user-point-sets">
+                    <div class="point-set">
+                        <label>Pruzio: <span>5</span> points</label>
+                        <label>Created: <span>timestamp</span></label>
+                        <div class="two-button-container"> 
+                            <button> Load </button> <button> Delete </button>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+            <div id="canvas-container">
+                <canvas id="canvas"></canvas>
+            </div>
+        </main>
+
+        <!-- login and signup boxes -->
+        <div id="login-modal" class="modal hidden">
+            <form id="login-form" class="form">
+                <label> Username: </label>
+                <input type="text" name="username" required pattern="^[A-Za-z0-9!#$%&*^_-~]{3,30}$">
+                <label> Password: </label>
+                <input type="password" name="password" required pattern="^[A-Za-z0-9!#$%&*^_-~]{6,30}$">
+    
+                <button id="login-submit" type="submit"> Login </button>
+                <button id="login-cancel" type="button"> Cancel </button>
+            </form>
+        </div>
+
+        <div id="signup-modal" class="modal hidden">
+            <form id="signup-form" class="form">
+                <label> Username: </label>
+                <input type="text" name="username" required pattern="^[A-Za-z0-9!#$%&*^_-~]{3,30}$">
+                <label> Email: </label>
+                <input type="text" name="email" required pattern="^[^@]+@[^@]+\.[^@]+$">
+                <label> Password: </label>
+                <input type="password" name="password" required pattern="^[A-Za-z0-9!#$%&*^_-~]{6,30}$">
+    
+                <button id="signup-submit" type="submit"> Signup </button>
+                <button id="signup-cancel" type="button"> Cancel </button>
+            </form>
+        </div>
+
+    </body>
+
+</html>

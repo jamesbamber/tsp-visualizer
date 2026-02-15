@@ -36,7 +36,7 @@ export default class TSP {
         this.best_path = undefined;
         this.update_ui();
 
-        this.pts = pts
+        this.pts = pts;
 
         this.display_points(this.pts);
     }

@@ -3,7 +3,7 @@
 
     --color-primary: rgb(63, 63, 63);
     --color-secondary: rgb(100, 100, 100);
-    --color-hover: rgb(197, 197, 197);
+    --color-hover: rgb(137, 137, 137);
 
     --color-text: rgb(217, 217, 217);
 }
@@ -26,6 +26,7 @@ body {
 main {
     display: grid;
     grid-template-columns: 280px 1fr;
+    min-height: 0;
 }
 
 .banner {
@@ -45,18 +46,18 @@ h1 {
 #options {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
     margin: 1em 0 1em 1em;
 
+    min-height: 0;
     gap: 1em;
+    overflow: hidden;
 }
 
 .option-box {
     display: flex;
     flex-direction: column;
     gap: 1em;
-
-    width: 80%;
 
     padding: 1em;
     background-color: var(--color-primary);
@@ -84,6 +85,11 @@ button:hover, select:hover {
     background-color: var(--color-hover);
 }
 
+button:disabled, select:disabled {
+    background-color: var(--color-secondary);
+    opacity: 0.5;
+}
+
 #path-length-box {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
@@ -93,4 +99,14 @@ button:hover, select:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
+}
+
+#path-length-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+
+    padding: 1em;
+    background-color: var(--color-primary);
+    border-radius: 1em;
 }
