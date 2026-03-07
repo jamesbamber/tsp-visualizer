@@ -14,7 +14,7 @@ function init() {
     resizeCanvas();
     
     problem = new TSP(canvas, update_path_length);
-    const userDashboard = new UserDashboard();
+    const userDashboard = new UserDashboard(problem);
     
     add_algorithm_to_select();
     

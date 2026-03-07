@@ -1,5 +1,5 @@
-import NearestNeighbor from "./nearest_neighbor.js"
-import FarthestNeighbor from "./farthest_neighbor.js"
+import NearestNeighbor from "./nearestNeighbor.js"
+import FarthestNeighbor from "./farthestNeighbor.js"
 import Random from "./random.js"
 
 const chosen_algorithm = {

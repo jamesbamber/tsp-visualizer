@@ -1,8 +1,9 @@
 import AuthContext from "./authContext.js"
 
 export default class UserDashboard {
-    constructor() {
+    constructor(problem) {
         this.authContext = new AuthContext;
+        this.problem = problem;
     
         const login_button = document.getElementById("login");
         login_button.addEventListener("click", () => this.show_element("login-modal"));
@@ -29,10 +30,33 @@ export default class UserDashboard {
                 if(this.authContext.loggedIn) this.successful_login();
             });
         });
+
+        const save_button = document.getElementById("save-points");
+        save_button.addEventListener("click", () => add_point_set);
     }
 
-    get_point_set_html(name, id, points) {
-        const div = 
+    get_point_set_html(name, id, points, point_count, created_at) {
+        // TODO add sanitization
+
+        const div = document.createElement("div");
+        div.classList.add("point-set");
+        div.innerHTML = `
+            <label>${name}: ${point_count} points</label>
+            <label>Created: ${created_at}</label>
+            <div class="two-button-container"> 
+                <button class="load-button"> Load </button> <button class="delete-button"> Delete </button>
+            </div>
+        `;
+
+        const load_button = div.querySelector(".load-button");
+        load_button.addEventListener(() => {
+            this.problem.new_problem(points);
+        });
+
+        const delete_button = div.querySelector(".delete-button");
+        delete_button.addEventListener(() => this.remove_point_set(id));
+        
+        return div;
     }
     
     show_element(id) {
@@ -46,10 +70,10 @@ export default class UserDashboard {
     }
 
     add_point_set() {
-
+        
     }
 
-    remove_point_set() {
+    remove_point_set(id) {
 
     }
 

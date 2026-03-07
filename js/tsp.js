@@ -51,7 +51,7 @@ export default class TSP {
         for await (const step of algorithm(this.pts)) {
             if(this.cancelled) break;
 
-            this.current_path = Point.path_length(step.current_solution);
+            this.current_path = Point.path_length(step.currentSolution);
             final_state = step;
 
             await this.render_step(step);

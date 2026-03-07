@@ -3,7 +3,7 @@ import Point from "../point.js"
 export default function* run(pts) {
     const progress = {
         points: pts,
-        current_solution: []
+        currentSolution: []
     }
 
     const N = pts.length;
@@ -17,10 +17,10 @@ export default function* run(pts) {
     }
 
     for(const idx of order) {
-        progress.current_solution.push(pts[idx]);
+        progress.currentSolution.push(pts[idx]);
         yield progress;
     }
 
-    progress.current_solution.push(pts[order[0]]);
+    progress.currentSolution.push(pts[order[0]]);
     yield progress;
 }
