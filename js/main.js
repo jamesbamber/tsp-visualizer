@@ -13,34 +13,34 @@ function init() {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     
-    problem = new TSP(canvas, update_path_length);
+    problem = new TSP(canvas, updatePathLength);
     const userDashboard = new UserDashboard(problem);
     
-    add_algorithm_to_select();
+    addAlgorithmToSelect();
     
-    const points_slider = document.getElementById("number-of-points");
-    points_slider.addEventListener("input", update_number_of_points);
-    update_number_of_points();
+    const pointsSlider = document.getElementById("number-of-points");
+    pointsSlider.addEventListener("input", updateNumberOfPoints);
+    updateNumberOfPoints();
     
-    const generate_points = document.getElementById("generate-points");
-    generate_points.addEventListener("click", generate_random_points);
+    const generatePoints = document.getElementById("generate-points");
+    generatePoints.addEventListener("click", generateRandomPoints);
     
-    const load_points = document.getElementById('load-points');
-    load_points.addEventListener('click', load_points_from_list);
+    const loadPoints = document.getElementById('load-points');
+    loadPoints.addEventListener('click', loadPointsFromList);
     
-    const save_points = document.getElementById('save-points');
-    save_points.addEventListener('click', save_points_from_list);
+    const savePoints = document.getElementById('save-points');
+    savePoints.addEventListener('click', savePointsFromList);
     
-    const delay_slider = document.getElementById("delay-time");
-    delay_slider.addEventListener("input", update_delay_time);
-    update_delay_time();
+    const delaySlider = document.getElementById("delay-time");
+    delaySlider.addEventListener("input", updateDelayTime);
+    updateDelayTime();
     
-    const run_algorithm = document.getElementById("run-algorithm");
-    run_algorithm.addEventListener("click", run_selected_algorithm);
+    const runAlgorithm = document.getElementById("run-algorithm");
+    runAlgorithm.addEventListener("click", runSelectedAlgorithm);
     
-    const stop_algorithm = document.getElementById("stop-algorithm");
-    stop_algorithm.style.display = "none";
-    stop_algorithm.addEventListener("click", stop_execution);
+    const stopAlgorithm = document.getElementById("stop-algorithm");
+    stopAlgorithm.style.display = "none";
+    stopAlgorithm.addEventListener("click", stopExecution);
     
 }
 
@@ -53,125 +53,125 @@ function resizeCanvas() {
     canvas.height = container.clientHeight - 2*padding;
 }
 
-function add_algorithm_to_select() {
-    const algo_select = document.getElementById("chosen-algorithm");
+function addAlgorithmToSelect() {
+    const algoSelect = document.getElementById("chosen-algorithm");
 
     for(const [algorithm, label] of Object.entries(Algorithms.labels)) {
         const option = document.createElement("option");
         option.value = algorithm;
         option.textContent = label;
 
-        algo_select.appendChild(option);
+        algoSelect.appendChild(option);
     }
 }
 
-function disable_buttons() {
-    const run_button = document.getElementById("run-algorithm");
-    const stop_button = document.getElementById("stop-algorithm");
+function disableButtons() {
+    const runButton = document.getElementById("run-algorithm");
+    const stopButton = document.getElementById("stop-algorithm");
     
-    run_button.style.display = "none";
-    stop_button.style.display = "block";
+    runButton.style.display = "none";
+    stopButton.style.display = "block";
     
-    const generate_button = document.getElementById("generate-points");
-    const algo_select = document.getElementById("chosen-algorithm");
-    const load_button = document.getElementById('load-points');
-    const save_button = document.getElementById('save-points');
+    const generateButton = document.getElementById("generate-points");
+    const algoSelect = document.getElementById("chosen-algorithm");
+    const loadButton = document.getElementById('load-points');
+    const saveButton = document.getElementById('save-points');
     
-    generate_button.disabled = true;
-    algo_select.disabled = true;
-    load_button.disabled = true;
-    save_button.disabled = true;
+    generateButton.disabled = true;
+    algoSelect.disabled = true;
+    loadButton.disabled = true;
+    saveButton.disabled = true;
 }
 
-function enable_buttons() {
-    const run_button = document.getElementById("run-algorithm");
-    const stop_button = document.getElementById("stop-algorithm");
+function enableButtons() {
+    const runButton = document.getElementById("run-algorithm");
+    const stopButton = document.getElementById("stop-algorithm");
     
-    run_button.style.display = "block";
-    stop_button.style.display = "none";
+    runButton.style.display = "block";
+    stopButton.style.display = "none";
     
-    const generate_button = document.getElementById("generate-points");
-    const algo_select = document.getElementById("chosen-algorithm");
-    const load_button = document.getElementById('load-points');
-    const save_button = document.getElementById('save-points');
+    const generateButton = document.getElementById("generate-points");
+    const algoSelect = document.getElementById("chosen-algorithm");
+    const loadButton = document.getElementById('load-points');
+    const saveButton = document.getElementById('save-points');
 
-    generate_button.disabled = false;
-    algo_select.disabled = false;
-    load_button.disabled = false;
-    save_button.disabled = false;
+    generateButton.disabled = false;
+    algoSelect.disabled = false;
+    loadButton.disabled = false;
+    saveButton.disabled = false;
 }
 
-function stop_execution() {
+function stopExecution() {
     problem.stop();
 }
 
-function update_path_length(current_path_length, best_path_length) {
-    const current_path = document.getElementById("current-path");
-    const best_path = document.getElementById("best-path");
+function updatePathLength(currentPathLength, bestPathLength) {
+    const currentPath = document.getElementById("current-path");
+    const bestPath = document.getElementById("best-path");
 
-    current_path.textContent = current_path_length?.toFixed(3);
-    best_path.textContent = best_path_length?.toFixed(3);
+    currentPath.textContent = currentPathLength?.toFixed(3);
+    bestPath.textContent = bestPathLength?.toFixed(3);
 }
 
-async function run_selected_algorithm() {
+async function runSelectedAlgorithm() {
     if(!problem.pts) {
         alert("Ran empty problem");
         return;
     }
 
-    disable_buttons();
+    disableButtons();
 
     try {
-        const chosen_algorithm = Algorithms.functions[document.getElementById("chosen-algorithm").value];
-        await problem.run_algorithm(chosen_algorithm);
+        const chosenAlgorithm = Algorithms.functions[document.getElementById("chosen-algorithm").value];
+        await problem.runAlgorithm(chosenAlgorithm);
     } finally {
-        enable_buttons();
+        enableButtons();
     }
 }
 
 
-function update_number_of_points() {
-    const points_slider = document.getElementById("number-of-points");
-    const points_label = document.getElementById("number-of-points-label");
+function updateNumberOfPoints() {
+    const pointsSlider = document.getElementById("number-of-points");
+    const pointsLabel = document.getElementById("number-of-points-label");
 
-    points_label.textContent = points_slider.value;
+    pointsLabel.textContent = pointsSlider.value;
 }
 
-function update_delay_time() {
-    const delay_slider = document.getElementById("delay-time");
-    const delay_label = document.getElementById("delay-time-label");
+function updateDelayTime() {
+    const delaySlider = document.getElementById("delay-time");
+    const delayLabel = document.getElementById("delay-time-label");
 
-    problem.set_delay(delay_slider.value);
-    delay_label.textContent = delay_slider.value;
+    problem.setDelay(delaySlider.value);
+    delayLabel.textContent = delaySlider.value;
 }
 
-function generate_random_points() {
-    const points_slider = document.getElementById("number-of-points");
-    const pts = problem.generate_random_points(points_slider.value);
+function generateRandomPoints() {
+    const pointsSlider = document.getElementById("number-of-points");
+    const pts = problem.generateRandomPoints(pointsSlider.value);
 
-    problem.new_problem(pts);
-    update_points_list(pts)
+    problem.newProblem(pts);
+    updatePointsList(pts)
 }
 
-function update_points_list(pts) {
-    const points_list = document.getElementById("points-list");
-    points_list.value = Point.convert_to_text(pts);
+function updatePointsList(pts) {
+    const pointsList = document.getElementById("points-list");
+    pointsList.value = Point.convertToText(pts);
 }
 
-function load_points_from_list() {
-    const points_list = document.getElementById("points-list");
+function loadPointsFromList() {
+    const pointsList = document.getElementById("points-list");
 
     try {
-        const pts = Point.from_text(points_list.value);
-        problem.new_problem(pts);
+        const pts = Point.fromText(pointsList.value);
+        problem.newProblem(pts);
     } catch (error) {
         console.log(error);
         alert(error.message);
     }
 }
 
-function save_points_from_list() {
-    const points_list = document.getElementById("points-list");
+function savePointsFromList() {
+    const pointsList = document.getElementById("points-list");
 
     alert("ERROR: this button is unimplemented");
 }

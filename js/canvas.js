@@ -1,4 +1,4 @@
-function draw_point(pt, ctx) {
+function drawPoint(pt, ctx) {
     ctx.fillStyle = "rgb(217, 217, 217)";
 
     ctx.beginPath();
@@ -6,7 +6,7 @@ function draw_point(pt, ctx) {
     ctx.fill();
 }
 
-function draw_line(pt1, pt2, ctx) {
+function drawLine(pt1, pt2, ctx) {
     ctx.strokeStyle = "rgb(217, 217, 217)";
     ctx.lineWidth = 2;
 
@@ -16,24 +16,24 @@ function draw_line(pt1, pt2, ctx) {
     ctx.stroke();
 }
 
-export function clear_canvas(canvas) {
+export function clearCanvas(canvas) {
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-export function draw_path_from_array(pts, canvas) {
+export function drawPathFromArray(pts, canvas) {
     const ctx = canvas.getContext("2d");
 
     for(let i=1; i<pts.length; i++) {
-        draw_line(pts[i-1].toCanvasCoords(canvas), pts[i].toCanvasCoords(canvas), ctx);
+        drawLine(pts[i-1].toCanvasCoords(canvas), pts[i].toCanvasCoords(canvas), ctx);
     }
 }
 
-export function draw_points_from_array(pts, canvas) {
+export function drawPointsFromArray(pts, canvas) {
     const ctx = canvas.getContext("2d");
 
     pts.forEach(pt => {
-        draw_point(pt.toCanvasCoords(canvas), ctx);
+        drawPoint(pt.toCanvasCoords(canvas), ctx);
     })
 }
 

@@ -72,11 +72,11 @@ export default class ApiContext {
         }
     }
 
-    static async add_point_set() {
+    static async addPointSet() {
 
     }
 
-    static async delete_point_set() {
+    static async deletePointSet() {
 
     }
 }

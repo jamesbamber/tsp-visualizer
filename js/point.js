@@ -17,7 +17,7 @@ export default class Point {
         return ((pt1.x - pt2.x) ** 2 + (pt1.y - pt2.y) ** 2) ** 0.5;
     }
 
-    static path_length(pts) {
+    static pathLength(pts) {
         let length = 0;
 
         for(let i = 0; i < pts.length - 1; i++) {
@@ -27,7 +27,7 @@ export default class Point {
         return length;
     }
 
-    static convert_to_text(pts) {
+    static convertToText(pts) {
         let text = ''
         pts.forEach(pt => {
             text += String(pt.x) + " " + String(pt.y) + "\n";
@@ -35,7 +35,7 @@ export default class Point {
         return text;
     }
 
-    static from_text(text) {
+    static fromText(text) {
         const pts = text
             .split("\n")
             .map(line => line.trim())

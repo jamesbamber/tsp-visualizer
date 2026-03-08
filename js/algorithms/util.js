@@ -2,17 +2,17 @@ import NearestNeighbor from "./nearestNeighbor.js"
 import FarthestNeighbor from "./farthestNeighbor.js"
 import Random from "./random.js"
 
-const chosen_algorithm = {
+const chosenAlgorithm = {
     functions : {
-        nearest_neighbor: NearestNeighbor,
-        farthest_neighbor: FarthestNeighbor,
+        nearestNeighbor: NearestNeighbor,
+        farthestNeighbor: FarthestNeighbor,
         random: Random
     },
     labels: {
-        nearest_neighbor: "Nearest Neighbor",
-        farthest_neighbor: "Farthest Neighbor",
+        nearestNeighbor: "Nearest Neighbor",
+        farthestNeighbor: "Farthest Neighbor",
         random: "Random"
     }
 }
 
-export default chosen_algorithm;
+export default chosenAlgorithm;

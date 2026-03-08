@@ -7,7 +7,7 @@ export default class AuthContext {
         this.loggedIn = false;
     }
 
-    async handle_signup(e) {
+    async handleSignup(e) {
         e.preventDefault();
 
         const username = e.target.username.value;
@@ -25,7 +25,7 @@ export default class AuthContext {
         this.loggedIn = loggedIn;
     }
 
-    async handle_login(e) {
+    async handleLogin(e) {
         e.preventDefault();
 
         const username = e.target.username.value;
