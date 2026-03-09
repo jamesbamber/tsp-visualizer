@@ -1,10 +1,7 @@
-import AuthContext from "./authContext.js"
+import { globals } from "../globals.js"
 
 export default class UserDashboard {
-    constructor(problem) {
-        this.authContext = new AuthContext;
-        this.problem = problem;
-    
+    constructor() {    
         const loginButton = document.getElementById("login");
         loginButton.addEventListener("click", () => this.showElement("login-modal"));
     
@@ -13,8 +10,8 @@ export default class UserDashboard {
     
         const loginForm = document.getElementById("login-form");
         loginForm.addEventListener("submit", (e) => {
-            this.authContext.handleLogin(e).then(() => {
-                if(this.authContext.loggedIn) this.successfulLogin();
+            globals.authContext.handleLogin(e).then(() => {
+                if(globals.authContext.loggedIn) this.successfulLogin();
             });
         });
     
@@ -26,13 +23,13 @@ export default class UserDashboard {
     
         const signupForm = document.getElementById("signup-form");
         signupForm.addEventListener("submit", (e) => {
-            this.authContext.handleSignup(e).then(() => {
-                if(this.authContext.loggedIn) this.successfulLogin();
+            globals.authContext.handleSignup(e).then(() => {
+                if(globals.authContext.loggedIn) this.successfulLogin();
             });
         });
 
         const saveButton = document.getElementById("save-points");
-        saveButton.addEventListener("click", () => addPointSet);
+        saveButton.addEventListener("click", () => this.addPointSet);
     }
 
     getPointSetHtml(name, id, points, pointCount, createdAt) {
@@ -50,7 +47,7 @@ export default class UserDashboard {
 
         const loadButton = div.querySelector(".load-button");
         loadButton.addEventListener(() => {
-            this.problem.newProblem(points);
+            globals.problem.newProblem(points);
         });
 
         const deleteButton = div.querySelector(".delete-button");
@@ -69,8 +66,11 @@ export default class UserDashboard {
         div.classList.add("hidden");
     }
 
-    addPointSet() {
-        
+    addPointSet(points) {
+        const name = "TODO: add point config name";
+        globals.apiContext.addPointSet(name, points);
+
+        // add point set to html
     }
 
     removePointSet(id) {

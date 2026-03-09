@@ -1,5 +1,7 @@
+import { globals } from "../globals.js"
+
 export default class ApiContext {
-    static async signup(username, email, password) {
+    async signup(username, email, password) {
         const formData = new FormData();
         formData.append("username", username);
         formData.append("email", email);
@@ -36,7 +38,7 @@ export default class ApiContext {
         }
     }
 
-    static async login(username, password) {
+    async login(username, password) {
         const formData = new FormData();
         formData.append("username", username);
         formData.append("password", password);
@@ -72,11 +74,37 @@ export default class ApiContext {
         }
     }
 
-    static async addPointSet() {
+    async addPointSet(pointsName, points) {
+        try {
+            const response = await fetch("../php/save.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    points: points,
+                    point_count: points.length,
+                    name: pointsName,
+                })
+            });
 
+            const responseData = await response.json();
+            
+            if(responseData.status === "success") {
+                alert("Point set saved successfully!");
+            } else {
+                throw Error(responseData.message);
+            }
+
+            return responseData;
+
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
     }
 
-    static async deletePointSet() {
+    async deletePointSet() {
 
     }
 }

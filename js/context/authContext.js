@@ -1,4 +1,4 @@
-import ApiContext from "./apiContext.js"
+import { globals } from "../globals.js"
 
 export default class AuthContext {
     constructor() {
@@ -14,7 +14,7 @@ export default class AuthContext {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        const { user, token, loggedIn } = await ApiContext.signup(
+        const { user, token, loggedIn } = await globals.apiContext.signup(
             username,
             email,
             password,
@@ -31,7 +31,7 @@ export default class AuthContext {
         const username = e.target.username.value;
         const password = e.target.password.value;
 
-        const { user, token, loggedIn } = await ApiContext.login(
+        const { user, token, loggedIn } = await globals.apiContext.login(
             username,
             password,
         );

@@ -1,11 +1,9 @@
 import TSP from "./tsp.js";
 import Point from "./point.js"
-import UserDashboard from "./context/userDashboard.js"
-
 import Algorithms from "./algorithms/util.js"
+import { globals, init_globals } from "./globals.js"
 
 document.addEventListener("DOMContentLoaded", init);
-let problem;
 
 function init() {
     const canvas = document.getElementById("canvas");
@@ -13,9 +11,8 @@ function init() {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     
-    problem = new TSP(canvas, updatePathLength);
-    const userDashboard = new UserDashboard(problem);
-    
+    init_globals(canvas, updatePathLength);
+
     addAlgorithmToSelect();
     
     const pointsSlider = document.getElementById("number-of-points");
@@ -102,7 +99,7 @@ function enableButtons() {
 }
 
 function stopExecution() {
-    problem.stop();
+    globals.problem.stop();
 }
 
 function updatePathLength(currentPathLength, bestPathLength) {
@@ -114,7 +111,7 @@ function updatePathLength(currentPathLength, bestPathLength) {
 }
 
 async function runSelectedAlgorithm() {
-    if(!problem.pts) {
+    if(!globals.problem.pts) {
         alert("Ran empty problem");
         return;
     }
@@ -129,7 +126,6 @@ async function runSelectedAlgorithm() {
     }
 }
 
-
 function updateNumberOfPoints() {
     const pointsSlider = document.getElementById("number-of-points");
     const pointsLabel = document.getElementById("number-of-points-label");
@@ -141,15 +137,15 @@ function updateDelayTime() {
     const delaySlider = document.getElementById("delay-time");
     const delayLabel = document.getElementById("delay-time-label");
 
-    problem.setDelay(delaySlider.value);
+    globals.problem.setDelay(delaySlider.value);
     delayLabel.textContent = delaySlider.value;
 }
 
 function generateRandomPoints() {
     const pointsSlider = document.getElementById("number-of-points");
-    const pts = problem.generateRandomPoints(pointsSlider.value);
+    const pts = globals.problem.generateRandomPoints(pointsSlider.value);
 
-    problem.newProblem(pts);
+    globals.problem.newProblem(pts);
     updatePointsList(pts)
 }
 
@@ -163,7 +159,7 @@ function loadPointsFromList() {
 
     try {
         const pts = Point.fromText(pointsList.value);
-        problem.newProblem(pts);
+        globals.problem.newProblem(pts);
     } catch (error) {
         console.log(error);
         alert(error.message);
@@ -173,5 +169,14 @@ function loadPointsFromList() {
 function savePointsFromList() {
     const pointsList = document.getElementById("points-list");
 
-    alert("ERROR: this button is unimplemented");
+    try {
+        // conversion to check if set is valid
+        const pts = Point.fromText(pointsList.value);
+        if(pts.length == 0) throw Error("Cannot save empty point set");
+
+        globals.userDashboard.addPointSet(pts);
+    } catch (error) {
+        console.log(error);
+        alert(error.message);
+    }
 }
