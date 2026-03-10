@@ -27,6 +27,10 @@ export default class Point {
         return length;
     }
 
+    static fromJSON(obj) {
+        return new Point(obj.x, obj.y);
+    }
+
     static convertToText(pts) {
         let text = ''
         pts.forEach(pt => {

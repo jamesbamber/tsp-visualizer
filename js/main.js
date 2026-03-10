@@ -25,9 +25,6 @@ function init() {
     const loadPoints = document.getElementById('load-points');
     loadPoints.addEventListener('click', loadPointsFromList);
     
-    const savePoints = document.getElementById('save-points');
-    savePoints.addEventListener('click', savePointsFromList);
-    
     const delaySlider = document.getElementById("delay-time");
     delaySlider.addEventListener("input", updateDelayTime);
     updateDelayTime();
@@ -63,39 +60,25 @@ function addAlgorithmToSelect() {
 }
 
 function disableButtons() {
-    const runButton = document.getElementById("run-algorithm");
-    const stopButton = document.getElementById("stop-algorithm");
-    
-    runButton.style.display = "none";
-    stopButton.style.display = "block";
-    
-    const generateButton = document.getElementById("generate-points");
-    const algoSelect = document.getElementById("chosen-algorithm");
-    const loadButton = document.getElementById('load-points');
-    const saveButton = document.getElementById('save-points');
-    
-    generateButton.disabled = true;
-    algoSelect.disabled = true;
-    loadButton.disabled = true;
-    saveButton.disabled = true;
+    for(const button of document.querySelectorAll("button")) {
+        if(button.id == "run-algorithm") 
+            button.style.display = "none";
+        else if(button.id == "stop-algorithm") 
+            button.style.display = "block";
+        else 
+            button.disabled = true;    
+    }
 }
 
 function enableButtons() {
-    const runButton = document.getElementById("run-algorithm");
-    const stopButton = document.getElementById("stop-algorithm");
-    
-    runButton.style.display = "block";
-    stopButton.style.display = "none";
-    
-    const generateButton = document.getElementById("generate-points");
-    const algoSelect = document.getElementById("chosen-algorithm");
-    const loadButton = document.getElementById('load-points');
-    const saveButton = document.getElementById('save-points');
-
-    generateButton.disabled = false;
-    algoSelect.disabled = false;
-    loadButton.disabled = false;
-    saveButton.disabled = false;
+    for(const button of document.querySelectorAll("button")) {
+        if(button.id == "run-algorithm") 
+            button.style.display = "block";
+        else if(button.id == "stop-algorithm") 
+            button.style.display = "none";
+        else 
+            button.disabled = false;    
+    }
 }
 
 function stopExecution() {
@@ -120,7 +103,7 @@ async function runSelectedAlgorithm() {
 
     try {
         const chosenAlgorithm = Algorithms.functions[document.getElementById("chosen-algorithm").value];
-        await problem.runAlgorithm(chosenAlgorithm);
+        await globals.problem.runAlgorithm(chosenAlgorithm);
     } finally {
         enableButtons();
     }
@@ -160,21 +143,6 @@ function loadPointsFromList() {
     try {
         const pts = Point.fromText(pointsList.value);
         globals.problem.newProblem(pts);
-    } catch (error) {
-        console.log(error);
-        alert(error.message);
-    }
-}
-
-function savePointsFromList() {
-    const pointsList = document.getElementById("points-list");
-
-    try {
-        // conversion to check if set is valid
-        const pts = Point.fromText(pointsList.value);
-        if(pts.length == 0) throw Error("Cannot save empty point set");
-
-        globals.userDashboard.addPointSet(pts);
     } catch (error) {
         console.log(error);
         alert(error.message);

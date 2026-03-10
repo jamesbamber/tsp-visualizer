@@ -1,4 +1,5 @@
 import { globals } from "../globals.js"
+import Point from "../point.js"
 
 export default class UserDashboard {
     constructor() {    
@@ -29,29 +30,38 @@ export default class UserDashboard {
         });
 
         const saveButton = document.getElementById("save-points");
-        saveButton.addEventListener("click", () => this.addPointSet);
+        saveButton.addEventListener("click", () => this.showElement("save-modal"));
+    
+        const saveCancelButton = document.getElementById("save-cancel");
+        saveCancelButton.addEventListener("click", () => this.hideElement("save-modal"));
+    
+        const saveForm = document.getElementById("save-form");
+        saveForm.addEventListener("submit", (e) => {
+            this.addPointSet(e).then(() => this.hideElement("save-modal"));
+        });
     }
 
-    getPointSetHtml(name, id, points, pointCount, createdAt) {
+    getPointSetHtml(point_set) {
         // TODO add sanitization
 
         const div = document.createElement("div");
         div.classList.add("point-set");
         div.innerHTML = `
-            <label>${name}: ${pointCount} points</label>
-            <label>Created: ${createdAt}</label>
+            <label>${point_set["name"]}: ${point_set["point_count"]} points</label>
+            <label>Created: ${point_set["created_at"]}</label>
             <div class="two-button-container"> 
                 <button class="load-button"> Load </button> <button class="delete-button"> Delete </button>
             </div>
         `;
 
         const loadButton = div.querySelector(".load-button");
-        loadButton.addEventListener(() => {
-            globals.problem.newProblem(points);
+        loadButton.addEventListener("click", () => {
+            console.log(point_set["points"]);
+            globals.problem.newProblem(point_set["points"].map(p => Point.fromJSON(p)));
         });
 
         const deleteButton = div.querySelector(".delete-button");
-        deleteButton.addEventListener(() => this.removePointSet(id));
+        deleteButton.addEventListener("click", () => this.removePointSet(point_set["id"]));
         
         return div;
     }
@@ -66,15 +76,41 @@ export default class UserDashboard {
         div.classList.add("hidden");
     }
 
-    addPointSet(points) {
-        const name = "TODO: add point config name";
-        globals.apiContext.addPointSet(name, points);
+    async addPointSet(e) {
+        e.preventDefault();
 
-        // add point set to html
+        try {
+            if(!globals.authContext.loggedIn) throw Error("You must log in to save a board");
+
+            const name = e.target.name.value;
+            const pointsList = document.getElementById("points-list");
+            const points = Point.fromText(pointsList.value);
+
+            const { data: pointSet } = await globals.apiContext.addPointSet(name, points);
+    
+            globals.authContext.user.point_sets.push(pointSet);
+            this.displayUserPointSets();
+        } catch (error) {
+            console.log(error);
+            alert(error.message);
+        }
     }
 
-    removePointSet(id) {
+    async removePointSet(id) {
+        try {
+            await globals.apiContext.deletePointSet(id);
+            const pointSets = globals.authContext.user.point_sets;
+            
+            const index = pointSets.findIndex(p => p["id"] == id);
+            if(index !== -1) {
+                pointSets.splice(index, 1);
+            }
+        } catch(error) {
+            console.log(error);
+            alert("an error occured");
+        }
 
+        this.displayUserPointSets();
     }
 
     successfulLogin() {
@@ -82,11 +118,29 @@ export default class UserDashboard {
         this.hideElement("login-modal");
         this.hideElement("signup-modal");
 
+        this.hideElement("login");
+        this.hideElement("signup");
+
+        const loginInfo = document.getElementById("login-info");
+        const label = document.createElement("label");
+        label.innerHTML = "Welcome " + globals.authContext.user.username; 
+
+        loginInfo.appendChild(label)
+        //TODO: implement logout
+
         this.displayUserPointSets();
     }
 
     displayUserPointSets() {
-        console.log(this);
+        const pointSets = globals.authContext.user.point_sets;
+        const pointSetList = document.getElementById("user-point-sets");
+
+        pointSetList.innerHTML = "";
+
+        for(const pointSet of pointSets) {
+            const div = this.getPointSetHtml(pointSet);
+            pointSetList.appendChild(div);
+        }
     }
 }
 

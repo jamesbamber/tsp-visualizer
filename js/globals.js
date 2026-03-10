@@ -15,4 +15,8 @@ export function init_globals(canvas, updatePathLength) {
     globals.userDashboard = new UserDashboard;
     globals.authContext = new AuthContext;
     globals.apiContext = new ApiContext;
+
+    if(globals.authContext.loggedIn) {
+        globals.userDashboard.displayUserPointSets();
+    }
 }

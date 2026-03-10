@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         $point_sets[] = [
             "id" => $point_set["id"],
             "name" => $point_set["name"],
-            "points" => $point_set["points"],
+            "points" => json_decode($point_set["points"]),
             "point_count" => $point_set["point_count"],
             "created_at" => $point_set["created_at"],
         ];

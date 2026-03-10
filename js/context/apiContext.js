@@ -100,11 +100,33 @@ export default class ApiContext {
 
         } catch (error) {
             console.error(error);
-            alert(error.message);
+            alert("An error occurred. Please try again.");
         }
     }
 
-    async deletePointSet() {
+    async deletePointSet(id) {
+        try {
+            const response = await fetch("../php/delete.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    point_set_id: id,
+                })
+            });
 
+            const responseData = await response.json();
+            
+            if(responseData.status === "success") {
+                alert("Point set deleted successfully!");
+            } else {
+                throw Error(responseData.message);
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("An error occurred. Please try again.");
+        }
     }
 }

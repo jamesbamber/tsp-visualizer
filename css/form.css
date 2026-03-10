@@ -27,6 +27,6 @@
     border-radius: 1em;
 }
 
-.modal.hidden {
+.hidden {
     display: none;
 }
