@@ -27,6 +27,17 @@ export default class Point {
         return length;
     }
 
+    static cycleLength(pts) {
+        let length = 0;
+
+        for(let i = 0; i < pts.length; i++) {
+            length += Point.dist(pts[i], pts[(i+1)%(pts.length)]);
+        }
+
+        return length;
+    }
+
+
     static fromJSON(obj) {
         return new Point(obj.x, obj.y);
     }
