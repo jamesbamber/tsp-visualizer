@@ -72,4 +72,8 @@ export default class Point {
             });
         return pts;
     }
+
+    copy() {
+        return new Point(this.x, this.y);
+    }
 }
