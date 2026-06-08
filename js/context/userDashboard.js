@@ -42,13 +42,25 @@ export default class UserDashboard {
     }
 
     getPointSetHtml(point_set) {
-        // TODO add sanitization
+
+        const escapeHTML = (str) =>
+            String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        // escaping html to prevent XSS
+        const safeName = escapeHTML(point_set["name"]);
+        const safeCount = escapeHTML(point_set["point_count"]);
+        const safeTimestamp = escapeHTML(point_set["created_at"]);
 
         const div = document.createElement("div");
         div.classList.add("point-set");
         div.innerHTML = `
-            <label>${point_set["name"]}: ${point_set["point_count"]} points</label>
-            <label>Created: ${point_set["created_at"]}</label>
+            <label>${safeName}: ${safeCount} points</label>
+            <label>Created: ${safeTimestamp}</label>
             <div class="two-button-container"> 
                 <button class="load-button"> Load </button> <button class="delete-button"> Delete </button>
             </div>
@@ -56,7 +68,7 @@ export default class UserDashboard {
 
         const loadButton = div.querySelector(".load-button");
         loadButton.addEventListener("click", () => {
-            console.log(point_set["points"]);
+            // console.log(point_set["points"]);
             globals.problem.newProblem(point_set["points"].map(p => Point.fromJSON(p)));
         });
 

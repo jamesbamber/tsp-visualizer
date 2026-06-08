@@ -17,7 +17,7 @@ class State {
     generateNextState() {
         const nextS = new State(this.points.map(p => p.copy()));
 
-        // generate random swap (maybe switch to 2 opt exchange later)
+        // generate random swap
         const N = this.points.length;
 
         let l = Math.floor(Math.random() * N);

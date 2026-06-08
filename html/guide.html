@@ -3,6 +3,8 @@
     <head>
         <title>TSP visualizer Guide</title>
         <meta charset="UTF-8">
+
+        <link rel="icon" href="../logo.svg">
     
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/guide.css">
@@ -16,7 +18,8 @@
         <main>
             <section>
                 <h2> The TSP problem </h2>
-                This is a visualizer for the famous Travelling Salesman Problem, showing a live animation of the problem with a variable number of points.
+                This is a visualizer for the Travelling Salesman Problem, showing a live animation of the problem with a variable number of points and selectable algorithms. <br>
+                The problem consist in finding the shortest cycle that visits all N given points in the cartesian plane, this problem is known to be NP-hard so the available algorithms are heuristic and don't always find the optimal solution. <br>
             </section>
 
             <section>
@@ -31,10 +34,10 @@
 
             <section>
                 <h2> Running the Simulation </h2>
-                You can choose the Algorithm from the dropdown menu on the left and then press the 'Run' button to begin the Simulation
-                The speed of the Simulation can be controlled using the 'Delay' slider.
+                You can choose the Algorithm from the dropdown menu on the left and then press the 'Run' button to begin the Simulation. <br>
+                The speed of the Simulation can be controlled using the 'Delay' slider. <br>
 
-                It is possible to stop the simulation during the run by pressing the same button, which will now display 'Stop'
+                It is possible to stop the simulation during the run by pressing the same button, which will now display 'Stop'. <br>
 
                 The live distance of the path will be displayed at the top of the screen, along with the best path found so far by the simulation.
                 
@@ -44,19 +47,19 @@
                 <h2> Available Algorithms </h2>
                 The available algorithms are:
                 <ul>
-                    <li> Nearest Neighbor </li>
-                    <li> Nearest Neighbor with two opt exchange </li>
-                    <li> Random </li>
-                    <li> Farthest Neighbor </li>
-                    <li> Simulated Annealing </li>
+                    <li> <bold>Nearest Neighbor</bold>: starts from a random point and then iteratively visits the nearest unvisited point. </li>
+                    <li> <bold>Nearest Neighbor with two opt exchange</bold>: after running Nearest Neighbor it keeps looking for greedy swaps in the path. </li>
+                    <li> <bold>Random</bold>: generates a uniformly random path </li>
+                    <li> <bold>Farthest Neighbor</bold>: starts from a random point and then iteratively visits the farthest unvisited point. </li>
+                    <li> <bold>Simulated Annealing</bold>: the main details of the algorithm can be found <a href="https://cp-algorithms.com/num_methods/simulated_annealing.html">here</a>  </li>
                 </ul>
             </section>
 
             <section>
                 <h2> Registration and Login </h2>
-                You can register using the button in the top right of the screen, and later login using your credentials.
-                After being logged in it possible to save your point sets using the save button under the list of points textbox, after that you must enter a name for the set.
-                All of the saved point sets are visible in a scroll menu in the bottom left of the screen, where they can be loaded or deleted using the appropriate buttons.
+                You can register using the button in the top right of the screen, and later login using your credentials. <br>
+                After being logged in it possible to save your point sets using the save button under the list of points textbox, after that you must enter a name for the set. <br>
+                All of the saved point sets are visible in a scroll menu in the bottom left of the screen, where they can be loaded or deleted using the appropriate buttons. <br>
 
             </section>
 

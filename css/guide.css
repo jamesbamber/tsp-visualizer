@@ -7,6 +7,10 @@ main {
     font-weight: 100;
 }
 
+bold {
+    font-weight: bold;
+}
+
 h3 {
     align-self: center;
 }

@@ -64,7 +64,7 @@ export default class Point {
 
                 const [x, y] = coords.map(parseFloat);
 
-                if(isNaN(x) || isNaN(y) || x < 0 || x >= LOGICAL_SPACE.width || y < 0 || x >= LOGICAL_SPACE.height) {
+                if(isNaN(x) || isNaN(y) || x < 0 || x > LOGICAL_SPACE.width || y < 0 || x > LOGICAL_SPACE.height) {
                     throw new Error("Unable to parse points values");
                 }
 
