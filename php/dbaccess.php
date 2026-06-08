@@ -1,8 +1,8 @@
 <?php
 
 define("DBHOST", "localhost");
-define("DBNAME", "pweb");
+define("DBNAME", "bamber_700096");
 define("DBUSER", "root");
-define("DBPASS", "");
+define("DBPASS", "pweb");
 
 ?>

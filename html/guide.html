@@ -18,26 +18,28 @@
         <main>
             <section>
                 <h2> The TSP problem </h2>
-                This is a visualizer for the Travelling Salesman Problem, showing a live animation of the problem with a variable number of points and selectable algorithms. <br>
-                The problem consist in finding the shortest cycle that visits all N given points in the cartesian plane, this problem is known to be NP-hard so the available algorithms are heuristic and don't always find the optimal solution. <br>
+                This is a visualizer for the <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Travelling Salesman Problem</a>, showing a live animation of the problem with a variable number of points and selectable algorithms. <br>
+                The problem consists of finding the shortest cycle that visits all N given points in the Cartesian plane.
+                This problem is known to be NP-hard, so the available algorithms are heuristic and don't always find the optimal solution. <br>
             </section>
 
             <section>
                 <h2> Generating Points </h2>
                 There are two ways to generate points:
                 <ul>
-                    <li> You can select the number of points using the 'Number of Points' slider and then press the generate points button.</li>
-                    <li> You can manually enter the coordinates of the points in the textbox labelled 'List of Points',  the x and y coordinate must be space separeted and they must be real numbers from 0 to 1000</li>
+                    <li> You can select the number of points using the 'Number of Points' slider and then press the 'Generate' button.</li>
+                    <li> You can manually enter the coordinates of the points in the textbox labelled 'List of Points' and then press the 'Load' button.</li>
                 </ul>
-                The points textbox can also be used to modify the loaded points configuration, note that for the changes to apply you need to press the 'Load' button again.
+                The list of points in the textbox must have numbers from 0 to 1000 (they will then be rescaled onto the canvas), the x and y coordinate must be separated by a space and different points must be separated by a newline. <br>
+                The points textbox can also be used to modify the loaded points configuration: note that for the changes to apply you need to press the 'Load' button again.
             </section>
 
             <section>
                 <h2> Running the Simulation </h2>
-                You can choose the Algorithm from the dropdown menu on the left and then press the 'Run' button to begin the Simulation. <br>
-                The speed of the Simulation can be controlled using the 'Delay' slider. <br>
+                You can choose the algorithm from the dropdown menu on the left and then press the 'Run' button to begin the simulation. <br>
+                The speed of the simulation can be controlled using the 'Delay' slider. <br>
 
-                It is possible to stop the simulation during the run by pressing the same button, which will now display 'Stop'. <br>
+                It is possible to stop the simulation while it's running by pressing the same button, which will now display 'Stop'. <br>
 
                 The live distance of the path will be displayed at the top of the screen, along with the best path found so far by the simulation.
                 
@@ -45,25 +47,32 @@
 
             <section>
                 <h2> Available Algorithms </h2>
-                The available algorithms are:
                 <ul>
-                    <li> <bold>Nearest Neighbor</bold>: starts from a random point and then iteratively visits the nearest unvisited point. </li>
-                    <li> <bold>Nearest Neighbor with two opt exchange</bold>: after running Nearest Neighbor it keeps looking for greedy swaps in the path. </li>
-                    <li> <bold>Random</bold>: generates a uniformly random path </li>
-                    <li> <bold>Farthest Neighbor</bold>: starts from a random point and then iteratively visits the farthest unvisited point. </li>
-                    <li> <bold>Simulated Annealing</bold>: the main details of the algorithm can be found <a href="https://cp-algorithms.com/num_methods/simulated_annealing.html">here</a>  </li>
+                    <li> <strong>Nearest Neighbor</strong>: starts from a random point and then iteratively visits the nearest unvisited point. </li>
+                    <li> <strong>Nearest Neighbor with two opt exchange</strong>: after running Nearest Neighbor it keeps looking for greedy swaps in the path. </li>
+                    <li> <strong>Random</strong>: generates a uniformly random path. </li>
+                    <li> <strong>Farthest Neighbor</strong>: starts from a random point and then iteratively visits the farthest unvisited point. </li>
+                    <li> <strong>Simulated Annealing</strong>: a heuristic search algorithm, you can find out more <a href="https://cp-algorithms.com/num_methods/simulated_annealing.html">here</a>.  </li>
                 </ul>
             </section>
 
             <section>
                 <h2> Registration and Login </h2>
                 You can register using the button in the top right of the screen, and later login using your credentials. <br>
-                After being logged in it possible to save your point sets using the save button under the list of points textbox, after that you must enter a name for the set. <br>
-                All of the saved point sets are visible in a scroll menu in the bottom left of the screen, where they can be loaded or deleted using the appropriate buttons. <br>
+                Your password must have at least 6 characters, username and password cannot contain spaces. <br><br>
+                After logging in it is possible to save your point sets using the 'Save' button under the 'List of Points' textbox, after that you must enter a name for the set. <br>
+                If you are logged in, all of your saved point sets will be visible in the scroll menu at the bottom left of the screen, where they can be loaded or deleted using the appropriate buttons. <br><br>
+
+                Some point sets have already been saved with the following credentials:
+                <ul>
+                    <li> <strong>Username:</strong> james</li>
+                    <li> <strong>Password:</strong> tspvis</li>
+                </ul>
 
             </section>
 
             <h2><a href="index.html">Back to the Simulation</a></h2>
+            <div id="bottom-space"></div>
 
         </main>
     </body>
