@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>TSP visualizer Guide</title>
+        <meta charset="UTF-8">
+    
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/guide.css">
+    </head>
+    
+    <body>
+        <header class="banner"> 
+            <h1> TSP visualizer guide </h1>
+        </header>
+
+        <main>
+            <section>
+                <h2> The TSP problem </h2>
+                This is a visualizer for the famous Travelling Salesman Problem, showing a live animation of the problem with a variable number of points.
+            </section>
+
+            <section>
+                <h2> Generating Points </h2>
+                There are two ways to generate points:
+                <ul>
+                    <li> You can select the number of points using the 'Number of Points' slider and then press the generate points button.</li>
+                    <li> You can manually enter the coordinates of the points in the textbox labelled 'List of Points',  the x and y coordinate must be space separeted and they must be real numbers from 0 to 1000</li>
+                </ul>
+                The points textbox can also be used to modify the loaded points configuration, note that for the changes to apply you need to press the 'Load' button again.
+            </section>
+
+            <section>
+                <h2> Running the Simulation </h2>
+                You can choose the Algorithm from the dropdown menu on the left and then press the 'Run' button to begin the Simulation
+                The speed of the Simulation can be controlled using the 'Delay' slider.
+
+                It is possible to stop the simulation during the run by pressing the same button, which will now display 'Stop'
+
+                The live distance of the path will be displayed at the top of the screen, along with the best path found so far by the simulation.
+                
+            </section>
+
+            <section>
+                <h2> Available Algorithms </h2>
+                The available algorithms are:
+                <ul>
+                    <li> Nearest Neighbor </li>
+                    <li> Nearest Neighbor with two opt exchange </li>
+                    <li> Random </li>
+                    <li> Farthest Neighbor </li>
+                    <li> Simulated Annealing </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2> Registration and Login </h2>
+                You can register using the button in the top right of the screen, and later login using your credentials.
+                After being logged in it possible to save your point sets using the save button under the list of points textbox, after that you must enter a name for the set.
+                All of the saved point sets are visible in a scroll menu in the bottom left of the screen, where they can be loaded or deleted using the appropriate buttons.
+
+            </section>
+
+            <h2><a href="index.html">Back to the Simulation</a></h2>
+
+        </main>
+    </body>
+
+</html>

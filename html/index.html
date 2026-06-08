@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>TSP visualizer</title>
         <meta charset="UTF-8">
@@ -13,7 +13,8 @@
     
     <body>
         <header class="banner"> 
-            <h1>TSP visualizer</h1>
+            <h1><a href="guide.html">TSP visualizer</a></h1>
+
             <div id="path-length-box">
                     <label> Current Path: </label><span id="current-path"></span>
                     <label> Current Best: </label><span id="best-path"></span>
@@ -26,7 +27,7 @@
         <main>
             <aside id="options">
                 <div class="option-box">
-                    <label>Number of points: <span id="number-of-points-label"></span> </label>
+                    <label>Number of Points: <span id="number-of-points-label"></span> </label>
                     <input type="range" min="1" max="100" value="20" class="slider" id="number-of-points">
                     <button id="generate-points">Generate</button>
                     <label>List of Points:</label>
@@ -84,7 +85,7 @@
         <div id="save-modal" class="modal hidden">
             <form id="save-form" class="form">
                 <label> Point set name: </label>
-                <input type="text" name="name" required pattern="^[A-Za-z0-9!#$%&*^_-~]{3,30}$">
+                <input type="text" name="name" required pattern="^[A-Za-z0-9!#$%&*^_-~ ]{3,30}$">
                 <button id="save-submit" type="submit"> Save </button>
                 <button id="save-cancel" type="button"> Cancel </button>
             </form>

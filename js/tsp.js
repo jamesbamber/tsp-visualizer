@@ -62,7 +62,9 @@ export default class TSP {
     }
 
     endOfRun(finalState) {
-        if(this.bestPath == undefined || this.currentPath < this.bestPath) this.bestPath = this.currentPath;
+        if(!this.cancelled) {
+            if(this.bestPath == undefined || this.currentPath < this.bestPath) this.bestPath = this.currentPath;
+        }
 
         this.renderStep(finalState);
 
