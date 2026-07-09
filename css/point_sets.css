@@ -1,7 +1,5 @@
 #user-point-sets {
     flex: 1;
-    overflow-y: auto;
-    min-height: 0;
 
     gap: 0;
     padding: 0.5em;

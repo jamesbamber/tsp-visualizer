@@ -138,7 +138,6 @@ export default class UserDashboard {
         label.innerHTML = "Welcome " + globals.authContext.user.username; 
 
         loginInfo.appendChild(label)
-        //TODO: implement logout
 
         this.displayUserPointSets();
     }
@@ -155,4 +154,3 @@ export default class UserDashboard {
         }
     }
 }
-

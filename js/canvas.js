@@ -36,4 +36,3 @@ export function drawPointsFromArray(pts, canvas) {
         drawPoint(pt.toCanvasCoords(canvas), ctx);
     })
 }
-

@@ -41,10 +41,9 @@ function init() {
 function resizeCanvas() {
     const canvas = document.getElementById("canvas");
     const container = document.getElementById("canvas-container");
-    const padding = parseFloat(window.getComputedStyle(container).padding);
-
-    canvas.width = container.clientWidth - 2*padding;
-    canvas.height = container.clientHeight - 2*padding;
+    
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
 }
 
 function addAlgorithmToSelect() {
